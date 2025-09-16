@@ -1,0 +1,35 @@
+name: Java CLI Grader
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Compile
+        run: javac Q3_2024_381.java Grader.java
+
+      - name: Run main (optional)
+        run: java Q3_2024_381
+
+      - name: Grade Section A
+        run: |
+          set -e
+          java Grader Q3_2024_381 A | tee grade-A.log
+          ! grep -q "FAIL" grade-A.log
+
+      - name: Grade Section B
+        run: |
+          set -e
+          java Grader Q3_2024_381 B | tee grade-B.log
+          ! grep -q "FAIL" grade-B.log
