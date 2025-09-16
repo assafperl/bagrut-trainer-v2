@@ -1,0 +1,11 @@
+name: Java compile & run
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile
+        run: javac Q3_2024_381.java
+      - name: Run tests (main)
+        run: java Q3_2024_381
