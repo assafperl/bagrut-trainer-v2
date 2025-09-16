@@ -6,6 +6,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Compile
-        run: javac Q3_2024_381.java
-      - name: Run tests (main)
-        run: java Q3_2024_381
+        run: javac Q3_2024_381.java Grader.java
+      - name: Run A submit
+        run: java Grader --qid Q3_2024_381_a --submit
+      - name: Run B submit
+        run: java Grader --qid Q3_2024_381_b --submit
